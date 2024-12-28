@@ -37,6 +37,7 @@ dependencies:
   flutter_stripe: ^11.3.0
   http: ^1.2.2
   get:
+  logger:
 dev_dependencies:
   flutter_test:
     sdk: flutter
