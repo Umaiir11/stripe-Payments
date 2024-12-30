@@ -35,23 +35,19 @@ class PaymentService {
   }
   Future<Map<String, dynamic>> getPaymentDetails(String paymentIntentId) async {
     try {
-      var response = await http.get(
-        Uri.parse('https://api.stripe.com/v1/payment_intents/$paymentIntentId'),
+      final response = await http.get(
+        Uri.parse("https://api.stripe.com/v1/payment_intents/$paymentIntentId"),
         headers: {
           'Authorization': 'Bearer ${GlobalKeys.gbStripeSecretKey}',
-          'Content-Type': 'application/x-www-form-urlencoded',
         },
       );
-
       if (response.statusCode == 200) {
-        return jsonDecode(response.body.toString());
+        return jsonDecode(response.body);
       } else {
-        print('Failed to fetch Payment Details: ${response.body}');
-        throw Exception('Failed to fetch Payment Details');
+        throw Exception("Failed to fetch payment details: ${response.body}");
       }
     } catch (e) {
-      print("Error fetching Payment Details: $e");
-      throw Exception(e);
+      throw Exception("Error in getPaymentDetails: $e");
     }
   }
 
